@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Avtar Paramedical Information Database Schema",
+  "description": "Firestore NoSQL Database Architecture for CBT Examination, Student Auth, Razorpay Payments & Study Content",
+  "collections": {
+    "students": {
+      "documentId": "firebase_auth_uid",
+      "fields": {
+        "studentId": { "type": "string", "example": "API-2026-4892", "unique": true },
+        "name": { "type": "string", "example": "Vikram Sharma" },
+        "mobile": { "type": "string", "example": "9876543210", "unique": true },
+        "email": { "type": "string", "example": "vikram@gmail.com" },
+        "registrationDate": { "type": "string", "example": "10 Nov 2026" },
+        "targetCategoryId": { "type": "string", "example": "radiographer" },
+        "role": { "type": "string", "enum": ["STUDENT", "ADMIN", "SUPER_ADMIN", "CONTENT_MANAGER"] },
+        "isActive": { "type": "boolean", "default": true },
+        "isBlocked": { "type": "boolean", "default": false },
+        "enrolledTestIds": { "type": "array<string>", "example": ["rad_free_demo", "rad_mega_series_1"] },
+        "completedAttemptIds": { "type": "array<string>", "example": ["att_849102"] },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "categories": {
+      "documentId": "category_slug",
+      "fields": {
+        "id": { "type": "string", "example": "radiographer" },
+        "name": { "type": "string", "example": "Radiographer Exam" },
+        "shortCode": { "type": "string", "example": "RAD" },
+        "description": { "type": "string", "example": "X-Ray, CT, MRI and Radiation Safety" },
+        "totalTests": { "type": "number", "example": 12 },
+        "totalVacancies": { "type": "number", "example": 340 }
+      }
+    },
+    "mock_tests": {
+      "documentId": "test_id",
+      "fields": {
+        "id": { "type": "string", "example": "rad_mega_series_1" },
+        "categoryId": { "type": "string", "example": "radiographer" },
+        "title": { "type": "string", "example": "AIIMS & RRB Radiographer All-India CBT 01" },
+        "subtitle": { "type": "string", "example": "Complete 100 Questions • Section Wise" },
+        "totalQuestions": { "type": "number", "example": 100 },
+        "durationMinutes": { "type": "number", "example": 90 },
+        "marksPerCorrect": { "type": "number", "example": 1.0 },
+        "negativeMarks": { "type": "number", "example": 0.25 },
+        "totalMarks": { "type": "number", "example": 100.0 },
+        "isPaid": { "type": "boolean", "example": true },
+        "price": { "type": "number", "example": 299 },
+        "originalPrice": { "type": "number", "example": 999 },
+        "isPublished": { "type": "boolean", "example": true },
+        "maxRetakes": { "type": "number", "example": 2 }
+      },
+      "subcollections": {
+        "questions": {
+          "documentId": "question_id",
+          "fields": {
+            "id": { "type": "string", "example": "rad_q1" },
+            "section": { "type": "string", "example": "Radiation Physics" },
+            "text": { "type": "string", "example": "What is the minimum lead equivalence for standard protective aprons?" },
+            "optionA": { "type": "string", "example": "0.15 mm Pb" },
+            "optionB": { "type": "string", "example": "0.25 mm Pb" },
+            "optionC": { "type": "string", "example": "0.50 mm Pb" },
+            "optionD": { "type": "string", "example": "1.00 mm Pb" },
+            "correctOption": { "type": "number", "enum": [0, 1, 2, 3] },
+            "explanation": { "type": "string", "example": "As per AERB standards, 0.5 mm Pb is mandatory..." },
+            "subjectTopic": { "type": "string", "example": "Radiation Protection" }
+          }
+        }
+      }
+    },
+    "exam_attempts": {
+      "documentId": "attempt_id",
+      "fields": {
+        "id": { "type": "string", "example": "att_849102" },
+        "testId": { "type": "string", "example": "rad_mega_series_1" },
+        "userId": { "type": "string", "example": "uid_vikram" },
+        "studentId": { "type": "string", "example": "API-2026-4892" },
+        "scoreObtained": { "type": "number", "example": 82.5 },
+        "totalMarks": { "type": "number", "example": 100.0 },
+        "correctCount": { "type": "number", "example": 85 },
+        "incorrectCount": { "type": "number", "example": 10 },
+        "unattemptedCount": { "type": "number", "example": 5 },
+        "accuracy": { "type": "number", "example": 89.4 },
+        "percentile": { "type": "number", "example": 98.2 },
+        "timeTakenSeconds": { "type": "number", "example": 4200 },
+        "userAnswers": { "type": "map<string, number>" },
+        "submittedAt": { "type": "timestamp" }
+      }
+    },
+    "transactions": {
+      "documentId": "razorpay_order_id",
+      "fields": {
+        "orderId": { "type": "string", "example": "order_Oq7Klx98V12a" },
+        "paymentId": { "type": "string", "example": "pay_Oq7M45p928" },
+        "userId": { "type": "string", "example": "uid_vikram" },
+        "testId": { "type": "string", "example": "rad_mega_series_1" },
+        "amountInr": { "type": "number", "example": 299 },
+        "amountPaise": { "type": "number", "example": 29900 },
+        "currency": { "type": "string", "example": "INR" },
+        "status": { "type": "string", "enum": ["PENDING", "SUCCESS", "FAILED", "REFUNDED"] },
+        "signature": { "type": "string" },
+        "createdAt": { "type": "timestamp" },
+        "verifiedAt": { "type": "timestamp" }
+      }
+    },
+    "study_materials": {
+      "documentId": "material_id",
+      "fields": {
+        "id": { "type": "string", "example": "mat_rad_1" },
+        "categoryId": { "type": "string", "example": "radiographer" },
+        "title": { "type": "string", "example": "Radiation Safety & ALARA Guidelines Handout" },
+        "subject": { "type": "string", "example": "Radiation Protection" },
+        "type": { "type": "string", "enum": ["PDF_DOCUMENT", "GOOGLE_DRIVE", "VIDEO_LECTURE", "QUESTION_BANK"] },
+        "accessUrl": { "type": "string", "example": "https://drive.google.com/..." },
+        "fileSizeBytes": { "type": "string", "example": "3.8 MB" },
+        "isFree": { "type": "boolean", "example": true }
+      }
+    },
+    "job_notifications": {
+      "documentId": "job_id",
+      "fields": {
+        "id": { "type": "string", "example": "job_1" },
+        "title": { "type": "string", "example": "Senior Radiographer & X-Ray Technician Vacancies" },
+        "hospitalOrganization": { "type": "string", "example": "AIIMS New Delhi" },
+        "department": { "type": "string", "example": "Department of Radiodiagnosis" },
+        "location": { "type": "string", "example": "New Delhi, India" },
+        "qualification": { "type": "string", "example": "B.Sc (Hons) in Radiography" },
+        "vacancies": { "type": "number", "example": 48 },
+        "salary": { "type": "string", "example": "Level 6 (₹35,400 - ₹1,12,400)" },
+        "deadlineDate": { "type": "string", "example": "30 Nov 2026" },
+        "officialApplyLink": { "type": "string", "example": "https://www.aiimsexams.ac.in" },
+        "isOfficialVerified": { "type": "boolean", "default": true }
+      }
+    }
+  }
+}

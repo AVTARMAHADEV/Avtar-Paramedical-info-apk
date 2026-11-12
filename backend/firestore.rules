@@ -1,0 +1,82 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+        (request.auth.token.role == 'ADMIN' || request.auth.token.role == 'SUPER_ADMIN');
+    }
+
+    // Students Collection
+    match /students/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if (isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'isBlocked', 'isActive', 'enrolledTestIds'])) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Exam Categories
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Mock Tests Catalog
+    match /mock_tests/{testId} {
+      allow read: if true;
+      allow write: if isAdmin();
+
+      // Protected Questions Subcollection (Correct options and explanations only readable for enrolled students or after attempt)
+      match /questions/{questionId} {
+        allow read: if isAuthenticated();
+        allow write: if isAdmin();
+      }
+    }
+
+    // Exam Attempts Collection
+    match /exam_attempts/{attemptId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    // Payment Transactions Collection (Created only via Backend Cloud Functions)
+    match /transactions/{orderId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if false; // Only Cloud Functions using Admin SDK can write transactions
+    }
+
+    // Coupons
+    match /coupons/{couponCode} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Study Materials & Google Drive links
+    match /study_materials/{materialId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Paramedical Job Notifications
+    match /job_notifications/{jobId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Security Audit Logs
+    match /security_audit_logs/{logId} {
+      allow read: if isAdmin();
+      allow write: if false; // Written only by Backend
+    }
+  }
+}

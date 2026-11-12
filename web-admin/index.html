@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avtar Paramedical Information – Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-box">API</div>
+                <div>
+                    <h2>AVTAR PARAMEDICAL</h2>
+                    <span class="tagline">Admin & Academic Portal</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="overview">
+                    <span class="icon">📊</span> Overview & Metrics
+                </button>
+                <button class="nav-item" data-tab="students">
+                    <span class="icon">👥</span> Student Management
+                </button>
+                <button class="nav-item" data-tab="exams">
+                    <span class="icon">📝</span> CBT Exam Series
+                </button>
+                <button class="nav-item" data-tab="bulk-upload">
+                    <span class="icon">📤</span> Bulk Question Upload
+                </button>
+                <button class="nav-item" data-tab="payments">
+                    <span class="icon">💳</span> Razorpay Transactions
+                </button>
+                <button class="nav-item" data-tab="content">
+                    <span class="icon">📚</span> Drive & Study Notes
+                </button>
+                <button class="nav-item" data-tab="jobs">
+                    <span class="icon">💼</span> Paramedical Jobs
+                </button>
+            </nav>
+
+            <div class="admin-profile">
+                <div class="avatar">DA</div>
+                <div>
+                    <strong>Dr. S. K. Avtar</strong>
+                    <span>Super Administrator</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <h1 id="page-title">Platform Overview</h1>
+                    <p class="subtitle">Monitor students, examinations, transactions, and paramedical recruitment in real time.</p>
+                </div>
+                <div class="header-actions">
+                    <span class="badge badge-success">● System Secure</span>
+                    <button class="btn btn-outline" id="export-btn">📥 Export Reports</button>
+                </div>
+            </header>
+
+            <!-- TAB: OVERVIEW -->
+            <section id="tab-overview" class="tab-pane active">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Total Enrolled Students</span>
+                            <span class="metric-icon">👥</span>
+                        </div>
+                        <h3 id="stat-students">1,842</h3>
+                        <span class="metric-sub text-success">+148 registered this week</span>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Total Revenue (Razorpay)</span>
+                            <span class="metric-icon">₹</span>
+                        </div>
+                        <h3 id="stat-revenue">₹4,82,650</h3>
+                        <span class="metric-sub text-success">Verified on Cloud Functions</span>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>CBT Mock Tests</span>
+                            <span class="metric-icon">📝</span>
+                        </div>
+                        <h3 id="stat-tests">55 Active</h3>
+                        <span class="metric-sub">Across 4 Disciplines</span>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Completed Exam Attempts</span>
+                            <span class="metric-icon">🎯</span>
+                        </div>
+                        <h3 id="stat-attempts">14,280</h3>
+                        <span class="metric-sub">Avg. Score: 68.4%</span>
+                    </div>
+                </div>
+
+                <div class="content-row">
+                    <div class="card flex-2">
+                        <h3>Top Performing Mock Test Series</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Test Series Name</th>
+                                    <th>Category</th>
+                                    <th>Attempts</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="top-tests-body">
+                                <tr>
+                                    <td><strong>AIIMS & RRB Radiographer All-India CBT 01</strong></td>
+                                    <td><span class="badge badge-blue">Radiographer</span></td>
+                                    <td>4,210</td>
+                                    <td>₹299</td>
+                                    <td><span class="badge badge-success">Live</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ESIC Lab Technician Mega CBT 2026</strong></td>
+                                    <td><span class="badge badge-teal">Lab Tech</span></td>
+                                    <td>3,890</td>
+                                    <td>₹349</td>
+                                    <td><span class="badge badge-success">Live</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AIIMS NORCET Nursing Grand Test Series</strong></td>
+                                    <td><span class="badge badge-purple">Nursing</span></td>
+                                    <td>5,120</td>
+                                    <td>₹499</td>
+                                    <td><span class="badge badge-success">Live</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>DHS Pharmacy Officer Speed Mock Pack</strong></td>
+                                    <td><span class="badge badge-cyan">Pharmacy</span></td>
+                                    <td>1,060</td>
+                                    <td>₹299</td>
+                                    <td><span class="badge badge-success">Live</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card flex-1">
+                        <h3>Category Distribution</h3>
+                        <div class="progress-item">
+                            <div class="progress-labels">
+                                <span>Nursing Officer (NORCET)</span>
+                                <span>45%</span>
+                            </div>
+                            <div class="progress-bar"><div class="fill fill-purple" style="width: 45%;"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-labels">
+                                <span>Radiographer Exam</span>
+                                <span>25%</span>
+                            </div>
+                            <div class="progress-bar"><div class="fill fill-blue" style="width: 25%;"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-labels">
+                                <span>Medical Lab Technician</span>
+                                <span>20%</span>
+                            </div>
+                            <div class="progress-bar"><div class="fill fill-teal" style="width: 20%;"></div></div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-labels">
+                                <span>Pharmacy Officer</span>
+                                <span>10%</span>
+                            </div>
+                            <div class="progress-bar"><div class="fill fill-cyan" style="width: 10%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: STUDENTS -->
+            <section id="tab-students" class="tab-pane">
+                <div class="card">
+                    <div class="card-header-actions">
+                        <h3>Student Database & Account Access</h3>
+                        <button class="btn btn-primary" onclick="openStudentModal()">+ Add New Student</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Mobile Number</th>
+                                <th>Discipline</th>
+                                <th>Enrolled Series</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="student-table-body">
+                            <!-- Populated via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB: EXAMS -->
+            <section id="tab-exams" class="tab-pane">
+                <div class="card">
+                    <div class="card-header-actions">
+                        <h3>Mock Test Series Manager</h3>
+                        <button class="btn btn-primary" onclick="openTestModal()">+ Create New Mock Test</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Test Series Title</th>
+                                <th>Category</th>
+                                <th>Questions</th>
+                                <th>Duration</th>
+                                <th>Marking (+ / -)</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="exam-table-body">
+                            <!-- Populated via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB: BULK UPLOAD -->
+            <section id="tab-bulk-upload" class="tab-pane">
+                <div class="card">
+                    <h3>Bulk Question Import Engine (Excel / CSV / JSON)</h3>
+                    <p class="subtitle">Import 50, 100, or 150 questions per test series. The validator checks option completeness, correct answer index, and medical explanations.</p>
+
+                    <div class="drop-zone" id="drop-zone">
+                        <span class="upload-icon">📁</span>
+                        <h4>Drag and drop questions CSV or Excel sheet</h4>
+                        <p>Format: section, question, option_a, option_b, option_c, option_d, correct_option (0-3), explanation</p>
+                        <input type="file" id="file-input" accept=".csv,.json" style="display: none;">
+                        <button class="btn btn-outline" onclick="document.getElementById('file-input').click()">Browse File</button>
+                    </div>
+
+                    <div id="validation-report" class="validation-box hidden">
+                        <h4>Validation Summary</h4>
+                        <p id="validation-text"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: PAYMENTS -->
+            <section id="tab-payments" class="tab-pane">
+                <div class="card">
+                    <h3>Razorpay Transaction & Purchase History</h3>
+                    <p class="subtitle">Real-time payment logs verified through backend webhook signatures.</p>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Student ID</th>
+                                <th>Purchased Series</th>
+                                <th>Amount</th>
+                                <th>Razorpay Order ID</th>
+                                <th>Payment ID</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payment-table-body">
+                            <!-- Populated via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB: CONTENT -->
+            <section id="tab-content" class="tab-pane">
+                <div class="card">
+                    <div class="card-header-actions">
+                        <h3>Google Drive Study Materials & Lectures</h3>
+                        <button class="btn btn-primary" onclick="openContentModal()">+ Add Study Resource</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Material Title</th>
+                                <th>Discipline</th>
+                                <th>Resource Type</th>
+                                <th>Access URL</th>
+                                <th>Tier</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content-table-body">
+                            <!-- Populated via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB: JOBS -->
+            <section id="tab-jobs" class="tab-pane">
+                <div class="card">
+                    <div class="card-header-actions">
+                        <h3>Paramedical Job Openings & Vacancy Feed</h3>
+                        <button class="btn btn-primary" onclick="openJobModal()">+ Post New Vacancy</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Designation</th>
+                                <th>Hospital / Organization</th>
+                                <th>Vacancies</th>
+                                <th>Location</th>
+                                <th>Deadline</th>
+                                <th>Verification</th>
+                            </tr>
+                        </thead>
+                        <tbody id="job-table-body">
+                            <!-- Populated via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

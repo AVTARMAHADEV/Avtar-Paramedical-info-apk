@@ -1,0 +1,6 @@
+{
+  "name": "Avtar Paramedical",
+  "description": "AVTAR Paramedical Information CBT Examination Platform for Radiographer, Lab Technician, Pharmacy Officer, and Nursing Officer competitive exams.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
